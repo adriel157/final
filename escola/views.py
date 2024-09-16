@@ -13,7 +13,7 @@ def index(request):
 
 def cadastrar(request):
         if request.method == 'POST':
-                form = AlunoForm(request.POST)
+                form = AlunoForm(request.POST, request.FILES)
                 if form.is_valid():
                         form.save()
                         return redirect('index')
@@ -29,9 +29,7 @@ def editar(request, id):
         if (request.method == 'POST'):
                 form = AlunoForm(request.POST, request.FILES, instance=aluno)
                 if form.is_valid():
-                        print(f"Imagem: {form.cleaned_data.get('imagem')}")
                         form.save()
-                        print(f"Imagem: {form.cleaned_data.get('imagem')}")
                         return redirect('index')
         else:
                 form = AlunoForm(instance=aluno)
